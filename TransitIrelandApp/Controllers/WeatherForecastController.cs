@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
+using TransitRealtime;
 
 namespace TransitIrelandApp.Controllers
 {
@@ -24,16 +29,15 @@ namespace TransitIrelandApp.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public string Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            WebRequest request = WebRequest.Create("https://gtfsr.transportforireland.ie/v1/");
+            request.Headers["Cache-Control"] = "no-cache";
+            request.Headers["x-api-key"] = "3fca6259b9814bef8e7a22ea63bdd1ce";
+
+            FeedMessage feed = Serializer.Deserialize<FeedMessage>(request.GetResponse().GetResponseStream());
+
+            return feed.Entities.Count() + "";
         }
     }
 }
