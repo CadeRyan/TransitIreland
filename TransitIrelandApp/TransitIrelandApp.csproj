@@ -24,6 +24,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Files\test.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Files\test.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\src\components\Bus\" />
     <Folder Include="ClientApp\src\components\Train\" />
   </ItemGroup>
