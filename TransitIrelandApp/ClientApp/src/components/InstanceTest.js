@@ -29,7 +29,6 @@ export class InstanceTest extends Component {
         return (
             <div>
                 <h1 id="tabelLabel" >InstanceTest</h1>
-                <p>This is the amount of entities remaining for today</p>
                 {contents}
             </div>
         );
