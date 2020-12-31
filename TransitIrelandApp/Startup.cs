@@ -38,7 +38,7 @@ namespace TransitIrelandApp
                 while (true)
                 {
                     GTFS.UpdateGTFSInformation();
-                    Thread.Sleep(20000);
+                    Thread.Sleep(120000);
                 }
             }).ConfigureAwait(false);
         }
