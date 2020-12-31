@@ -31,12 +31,15 @@ namespace TransitIrelandApp.Controllers
         [HttpGet]
         public string Get()
         {
+            Console.WriteLine("ENTERED 1");
             WebRequest request = WebRequest.Create("https://gtfsr.transportforireland.ie/v1/");
             request.Headers["Cache-Control"] = "no-cache";
             request.Headers["x-api-key"] = "3fca6259b9814bef8e7a22ea63bdd1ce";
 
             FeedMessage feed = Serializer.Deserialize<FeedMessage>(request.GetResponse().GetResponseStream());
 
+
+            Console.WriteLine("RETURN 1", feed.Entities.Count());
             return feed.Entities.Count() + "";
         }
     }
