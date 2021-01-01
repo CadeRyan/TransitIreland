@@ -7,6 +7,7 @@ import { Counter } from './components/Counter';
 import { LuasStopSearch } from './components/Luas/StopSearch';
 import { TrainStopSearch } from './components/Train/StopSearch';
 import { LuasStopRTI } from './components/Luas/StopRTI';
+import { InstanceTest } from './components/InstanceTest';
 
 
 import './custom.css'
@@ -17,15 +18,17 @@ export default class App extends Component {
   render () {
       return (
           <div className="page-container">
-             <div className="content-wrap">
-                <Route exact path='/' component={Home} />
-                <Route path='/counter' component={Counter} />
-                <Route path='/fetch-data' component={FetchData} />
-                <Route path='/luasSearch' component={LuasStopSearch} />
-                <Route path='/luasRTI' component={LuasStopRTI} />
-                <Route path='/trainSearch' component={TrainStopSearch} />
+              <div className="content-wrap">
+                  <Route exact path='/' component={Home} />
+                  <Route path='/counter' component={Counter} />
+                  <Route path='/fetch-data' component={FetchData} />
+                  <Route path='/luasSearch' component={LuasStopSearch} />
+                  <Route path='/luasRTI' component={LuasStopRTI} />
+                  <Route path='/trainSearch' component={TrainStopSearch} />
+                  <Route path='/instance' component={InstanceTest} />
               </div>
           </div>
-    );
+
+      );
   }
 }
