@@ -167,6 +167,9 @@ export class LuasStopSearch extends Component {
                         <div className="col" onClick={() => this.changeTab("Luas")}>
                             <h3>Luas</h3>
                         </div>
+                        <div className="col" onClick={() => this.changeTab("Luas")}>
+                            <h3>Luas</h3>
+                        </div>
                     </div>
 
                 </div>

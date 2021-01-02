@@ -4,9 +4,19 @@
     background-color: #d3d3d3;
     padding-top: 2em;
     padding-bottom: 2em;
-    position:center;
-    bottom:0;
+    position: center;
+    bottom: 0;
     width: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items:center;
+}
+
+.container {
+    position: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 
