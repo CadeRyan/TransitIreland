@@ -1,13 +1,15 @@
 ﻿import { Button } from 'bootstrap';
 import React, { Component } from 'react';
 import './StopSearch.css';
+import { ScrollView } from "@cantonjs/react-scroll-view";
+
 export class LuasStopSearch extends Component {
     static displayName = LuasStopSearch.name;
 
     constructor(props) {
         super(props);
         this.state = {
-            list: [], search: true, selectedStop: "", transportType: "Bus"
+            list: [], search: true, selectedStop: "", transportType: "Bus",searchResults:[],prevSearch:""
             
         };
         this.handleChange = this.handleChange.bind(this);
@@ -17,11 +19,20 @@ export class LuasStopSearch extends Component {
 
     }
 
+
+    backClick() {
+        this.setState({ search: true, selectedStop: "", list: this.state.searchResults })
+    }
+
     changeTab(tab) {
-        this.setState({ transportType:tab })
+
+        this.setState({ transportType: tab, list: [], search: true, selectedStop: "", prevSearch:"" })
+
+        this.refs.searchInput.value = '';
     }
 //    
     stopClicked(stop) {
+        this.setState({ searchResults: this.state.list});
         this.getTimesFromBackend(stop);
         this.setState({ search: false, selectedStop: stop });
 
@@ -32,6 +43,7 @@ export class LuasStopSearch extends Component {
     }
 
     handleChange(event) {
+        this.setState({ prevSearch: event.target.value })
         this.getStopsFromBackend(event.target.value);
     }
 
@@ -112,7 +124,6 @@ export class LuasStopSearch extends Component {
         );
     }
 
-
     renderTrainTimes(trips) {
 
         console.log("COUNT", trips)
@@ -165,6 +176,9 @@ export class LuasStopSearch extends Component {
             );
     }
 
+
+
+
     render() {
         let title = this.state.search
             ? <h1 id="tabelLabel" >{this.state.transportType} Search</h1>
@@ -197,17 +211,27 @@ export class LuasStopSearch extends Component {
 
         return (
             <div className="page-container">
-                <div className="content-wrap">
-                
+                <div className="content-wrap" style={{ height: '90vh', overflowY: 'scroll' }}>
+                    <div className="indent">
                 {title}
                 {this.state.search && <form>
                     <input
                         type="text"
+                        ref="searchInput"
+                        value={this.state.prevSearch}
                         onChange={this.handleChange}
                     />
-                </form>}
-                {table}
-
+                    </form>}
+                    {!this.state.search && <button
+                        onClick={() => this.backClick()}
+                    >
+                            Back
+                        </button>
+                    }
+                    <ScrollView style={{ height: '70vh' }}>
+                        {table}
+                    </ScrollView>
+                    </div>
                 </div>
                 {bottomNav}
             </div>
@@ -215,23 +239,30 @@ export class LuasStopSearch extends Component {
     }
 
     async getStopsFromBackend(input) {
-        var response;
-        if (this.state.transportType === "Train") {
-            response = await fetch('api/trainsearch/' + input);
-        }
-        else if (this.state.transportType === "Luas") {
-            response = await fetch('api/luassearch/' + input);
+        if (input === "") {
+            this.setState({ list: [], loading: false });
         }
         else {
-            response = await fetch('api/bussearch/' + input);
+
+            var response;
+            if (this.state.transportType === "Train") {
+                response = await fetch('api/trainsearch/' + input);
+            }
+            else if (this.state.transportType === "Luas") {
+                response = await fetch('api/luassearch/' + input);
+            }
+            else {
+                response = await fetch('api/bussearch/' + input);
+            }
+
+
+            console.log("RESPONSE", response)
+            const data = await response.json();
+            console.log("DATA", data)
+
+            this.setState({ list: data, loading: false });
         }
         
-
-        console.log("RESPONSE", response)
-        const data = await response.json();
-        console.log("DATA", data)
-
-        this.setState({ list: data, loading: false });
     }
 
     async getTimesFromBackend(input) {
