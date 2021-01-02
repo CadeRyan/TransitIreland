@@ -2,8 +2,9 @@
 .main-footer {
     color: black;
     background-color: #d3d3d3;
-    padding-top: 3em;
-    position:relative;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    position:center;
     bottom:0;
     width: 100%;
 }
@@ -17,4 +18,8 @@
 
 .content-wrap {
     flex: 1;
+}
+
+.indent{
+   padding-left:2em;
 }
