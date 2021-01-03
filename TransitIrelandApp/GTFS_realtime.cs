@@ -10,7 +10,7 @@ using TransitRealtime;
 
 namespace TransitIrelandApp
 {
-    public static class GTFS
+    public static class GTFS_realtime
     {
         public static void UpdateGTFSInformation()
         {
