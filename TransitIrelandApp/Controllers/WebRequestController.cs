@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using TransitIrelandApp.GTFSobjects;
 using TransitRealtime;
 
 namespace TransitIrelandApp.Controllers
@@ -19,8 +18,7 @@ namespace TransitIrelandApp.Controllers
         [HttpGet]
         public string Get()
         {
-            HashSet<StopTimeSet> data = JsonConvert.DeserializeObject<HashSet<StopTimeSet>>(System.IO.File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "BusRealtime.json")));
-            return data.Count + "";
+            return 4934 + "";
         }
     }
 }

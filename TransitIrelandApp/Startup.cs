@@ -32,12 +32,6 @@ namespace TransitIrelandApp
             {
                 configuration.RootPath = "ClientApp/build";
             });
-
-            Task.Run(() =>
-            {
-                GTFS_static.UpdateGtfsSData();
-                GTFS_realtime.UpdateGtfsRData();
-            }).ConfigureAwait(false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
