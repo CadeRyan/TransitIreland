@@ -17,16 +17,17 @@ namespace TransitIrelandApp.Controllers
     public class GetRealtimeJSONController : ControllerBase
     {
         [HttpPost]
-        public dynamic Post([FromBody] dynamic content)
+        public string Post([FromBody] dynamic content)
         {
-            //JObject jObject = JObject.Parse(content);
-            //string title = (string)jObject["title"];
-            //Dictionary<string, object> obj = JsonConvert.DeserializeObject<Dictionary<string, object>>(Convert.ToString(content));
-            //return (string)obj["title"];
+            System.IO.File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "BusRealtime.json"), content);
 
+            return "update received";
+        }
 
-
-            return content;
+        [HttpGet]
+        public string Get()
+        {
+            return System.IO.File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "BusRealtime.json"));
         }
     }
 }
