@@ -5,6 +5,8 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { LuasStopSearch } from './components/Luas/StopSearch';
+import { TrainStopSearch } from './components/Train/StopSearch';
+import { LuasStopRTI } from './components/Luas/StopRTI';
 import { InstanceTest } from './components/InstanceTest';
 import { GetJSON } from './components/GetJSON';
 
@@ -15,6 +17,7 @@ export default class App extends Component {
   static displayName = App.name;
 
   render () {
+<<<<<<< HEAD
     return (
       <Layout>
         <Route exact path='/' component={Home} />
@@ -25,5 +28,21 @@ export default class App extends Component {
             <Route path='/getJSON' component={GetJSON} />
       </Layout>
     );
+=======
+      return (
+          <div className="page-container">
+              <div className="content-wrap">
+                  <Route exact path='/' component={Home} />
+                  <Route path='/counter' component={Counter} />
+                  <Route path='/fetch-data' component={FetchData} />
+                  <Route path='/luasSearch' component={LuasStopSearch} />
+                  <Route path='/luasRTI' component={LuasStopRTI} />
+                  <Route path='/trainSearch' component={TrainStopSearch} />
+                  <Route path='/instance' component={InstanceTest} />
+              </div>
+          </div>
+
+      );
+>>>>>>> e490b3392d36d6827f05dabc73b1e48c58757900
   }
 }

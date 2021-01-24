@@ -29,7 +29,7 @@ export class FetchData extends Component {
     return (
       <div>
         <h1 id="tabelLabel" >Entity Count</h1>
-        <p>This is the amount of entities remaining for today</p>
+        <p>This is the amount of entities remaining for today:</p>
         {contents}
       </div>
     );

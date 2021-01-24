@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -16,15 +18,7 @@ namespace TransitIrelandApp.Controllers
         [HttpGet]
         public string Get()
         {
-            Console.WriteLine("ENTERED 2");
-            WebRequest request = WebRequest.Create("https://gtfsr.transportforireland.ie/v1/");
-            request.Headers["Cache-Control"] = "no-cache";
-            request.Headers["x-api-key"] = "3fca6259b9814bef8e7a22ea63bdd1ce";
-
-            FeedMessage feed = Serializer.Deserialize<FeedMessage>(request.GetResponse().GetResponseStream());
-
-            Console.WriteLine("RETURN 2", feed.Entities.Count());
-            return feed.Entities.Count() + "";
+            return 4934 + "";
         }
     }
 }
