@@ -6,6 +6,7 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { LuasStopSearch } from './components/Luas/StopSearch';
 import { InstanceTest } from './components/InstanceTest';
+import { GetJSON } from './components/GetJSON';
 
 
 import './custom.css'
@@ -21,6 +22,7 @@ export default class App extends Component {
         <Route path='/fetch-data' component={FetchData} />
             <Route path='/luasSearch' component={LuasStopSearch} />
             <Route path='/instance' component={InstanceTest} />
+            <Route path='/getJSON' component={GetJSON} />
       </Layout>
     );
   }
