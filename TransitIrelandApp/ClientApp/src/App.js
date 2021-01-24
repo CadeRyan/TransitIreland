@@ -17,18 +17,6 @@ export default class App extends Component {
   static displayName = App.name;
 
   render () {
-<<<<<<< HEAD
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
-            <Route path='/luasSearch' component={LuasStopSearch} />
-            <Route path='/instance' component={InstanceTest} />
-            <Route path='/getJSON' component={GetJSON} />
-      </Layout>
-    );
-=======
       return (
           <div className="page-container">
               <div className="content-wrap">
@@ -39,10 +27,12 @@ export default class App extends Component {
                   <Route path='/luasRTI' component={LuasStopRTI} />
                   <Route path='/trainSearch' component={TrainStopSearch} />
                   <Route path='/instance' component={InstanceTest} />
+                  <Route path='/getJSON' component={GetJSON} />
+
               </div>
           </div>
 
       );
->>>>>>> e490b3392d36d6827f05dabc73b1e48c58757900
+
   }
 }
