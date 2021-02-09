@@ -32,9 +32,9 @@ export class LuasStopSearch extends Component {
     }
 //    
     stopClicked(stop) {
-        this.setState({ searchResults: this.state.list});
-        this.getTimesFromBackend(stop);
+        this.setState({ searchResults: this.state.list });
         this.setState({ search: false, selectedStop: stop });
+        this.getTimesFromBackend(stop);
 
     }
 
@@ -95,6 +95,35 @@ export class LuasStopSearch extends Component {
         );
     }
 
+    renderBusStops(stops) {
+
+        console.log("COUNT", stops)
+        return (
+
+
+
+            <table className='table table-striped' aria-labelledby="tabellabel">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Address</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {stops.map(stop =>
+                        <tr key={stop.Id} onClick={() => this.stopClicked(stop)}>
+                            <td >{stop.Id}</td>
+                            <td>{stop.Address}</td>
+
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+
+        );
+    }
+
     renderLuasTimes(trips) {
 
         console.log("COUNT", trips)
@@ -145,6 +174,39 @@ export class LuasStopSearch extends Component {
                             <td >{trip.Destination}</td>
                             <td>{trip.Duein === "DUE" ? "Due" : trip.Duein + " Min"}</td>
 
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+
+        );
+    }
+
+
+    renderBusTimes(trips) {
+
+        console.log("COUNT", trips)
+        return (
+
+
+
+            <table className='table table-striped' aria-labelledby="tabellabel">
+                <thead>
+                    <tr>
+                        <th>Agency</th>
+                        <th>Route</th>
+                        <th>Destination</th>
+                        <th>Due</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {trips.map(trip =>
+                        <tr key={trip.DueAt}>
+                            <td >{trip.Agency}</td>
+                            <td >{trip.RouteId}</td>
+                            <td >{trip.Destination}</td>
+                            <td >{trip.DueAt}</td>
                         </tr>
                     )}
                 </tbody>
@@ -263,6 +325,9 @@ export class LuasStopSearch extends Component {
             }
             else {
                 response = await fetch('GetRealTimeJSON');
+                let stop = response.input
+                if (stop !== undefined) { console.log("StOP", stop.id)}
+                
             }
 
 
@@ -270,7 +335,22 @@ export class LuasStopSearch extends Component {
             const data = await response.json();
             console.log("DATA", data)
 
-            this.setState({ list: data, loading: false });
+            if (this.state.transportType === "Bus") {
+
+                let stops = []
+                let inputStr = input+""
+                let stop = data[inputStr]
+                console.log("Stop ", stop)
+                console.log("Input ", input)
+                console.log("InputSTR ", inputStr)
+                if (stop !== undefined) { stops.push(stop) }
+                this.setState({ list: stops, loading: false });
+            }
+            else {
+                this.setState({ list: data, loading: false });
+            }
+
+            
         }
         
     }
@@ -290,10 +370,8 @@ export class LuasStopSearch extends Component {
             this.setState({ list: data.Trams });
         }
         else {
-            const response = await fetch('api/busRTI/' + input);
-            const data = await response.json();
-            console.log("DATA", data.Trams)
-            this.setState({ list: data.Trams });
+            let realtime = input.RealtimeResults
+            this.setState({ list: realtime, selectedStop: input.Id });
         }
 
         
