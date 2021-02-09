@@ -158,7 +158,7 @@ export class LuasStopSearch extends Component {
             <div className="main-footer">
                 <div className="container">
                     <div className="row">
-                        <div className="col" onClick={() => this.changeTab("Bus")}>
+                        <div className="col" onClick={() => this.changeTab("Bus RT")}>
                             <h3>Bus</h3>
                         </div>
                         <div className="col" onClick={() => this.changeTab("Train")}>
@@ -197,6 +197,10 @@ export class LuasStopSearch extends Component {
             else if (this.state.transportType === "Luas") {
                 table = this.renderLuasStops(this.state.list);
             }
+            else if (this.state.transportType === "Bus") {
+                table = this.renderBusStops(this.state.list);
+            }
+
             
         }
         else {
@@ -205,6 +209,9 @@ export class LuasStopSearch extends Component {
             }
             else if (this.state.transportType === "Luas") {
                 table = this.renderLuasTimes(this.state.list);
+            }
+            else if (this.state.transportType === "Bus") {
+                table = this.renderBusTimes(this.state.list);
             }
         }
      
@@ -255,7 +262,7 @@ export class LuasStopSearch extends Component {
                 response = await fetch('api/luassearch/' + input);
             }
             else {
-                response = await fetch('api/bussearch/' + input);
+                response = await fetch('GetRealTimeJSON');
             }
 
 
