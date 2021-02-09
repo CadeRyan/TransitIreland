@@ -24,6 +24,7 @@ export default class App extends Component {
                   <Route path='/counter' component={Counter} />
                   <Route path='/fetch-data' component={FetchData} />
                   <Route path='/luasSearch' component={LuasStopSearch} />
+                  <Route path='/realtime' component={LuasStopSearch} />
                   <Route path='/luasRTI' component={LuasStopRTI} />
                   <Route path='/trainSearch' component={TrainStopSearch} />
                   <Route path='/instance' component={InstanceTest} />
